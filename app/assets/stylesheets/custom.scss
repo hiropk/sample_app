@@ -1,7 +1,8 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
-/*コメント*/
+/*mixins. variables, etc.*/
+$gray-medium-light: #eaeaea;
+/*universal*/
 body{
   padding-top: 60px;
 }
@@ -16,10 +17,9 @@ textarea{
 
 .center{
   text-align: center;
-}
-
-.center h1{
-  margin-bottom: 10px;
+  h1 {
+    margin-bottom: 10px;
+  }
 }
 
 /*typography　文章をみやすくするための手法のこと*/
@@ -41,7 +41,7 @@ h2{
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #777;
+  color: $gray-light;
 }
 
 p {
@@ -59,11 +59,10 @@ p {
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
-}
-
-#logo:hover {
+  &:hover {
   coloer: #fff;
   text-decoration: none;
+  }
 }
 
 /* footer */
@@ -72,15 +71,13 @@ footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid #eaeaea;
-  color: #777;
-}
-
-footer a {
-  color: #555
-}
-
-footer a:hover {
-  coloer: #222;
+  color: $gray-light;
+  a {
+    color: $gray
+    &:hover{
+      coloer: $gray-darker
+    }
+  }
 }
 
 footer small{
