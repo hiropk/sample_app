@@ -12,7 +12,7 @@ section{
 }
 
 textarea{
-  resize: verticalE;
+  resize: vertical;
 }
 
 .center{
@@ -73,9 +73,9 @@ footer {
   border-top: 1px solid #eaeaea;
   color: $gray-light;
   a {
-    color: $gray
+    color: $gray;
     &:hover{
-      coloer: $gray-darker
+      coloer: $gray-darker;
     }
   }
 }
