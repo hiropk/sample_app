@@ -1,7 +1,6 @@
 //　　ヘッダーのメニュー操作
 
 //　トグルリスナーを追加する
-//addToggleListener(トグル機能を追加したいタグのid, トグル機能で表示するmenuをもつタグのid, )
 function addToggleListener(selected_id, menu_id, toggle_class) {
   let selected_element = document.querySelector(`#${selected_id}`);
   selected_element.addEventListener("click", function(event) {
@@ -14,9 +13,8 @@ function addToggleListener(selected_id, menu_id, toggle_class) {
 
 // クリックをリッスンするトグルリスナーを追加する
 document.addEventListener("turbo:load", function() {
-  //collapseがある　→　navbar-menuが壊れる。
-  //collapseがない　→ navbar-menuが生きる。
+  //ロード直後、colapseを追加/削除
   addToggleListener("hamburger", "navbar-menu", "collapse");
-  //activeを追加するとdropdown-menuが実行される。
+  //accountをクリック時に、activeを追加/削除
   addToggleListener("account", "dropdown-menu", "active");
 })
