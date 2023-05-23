@@ -30,10 +30,13 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", logout_path
     #　メニューにはcurrent_userメソッドでログイン中のuserオブジェクトを返しており、profileにこのuser_path(@user)でリンク先を示している。
     assert_select "a[href=?]", user_path(@user)
+    # deleteメソッドで、logout_pathで指定されたsessionsコントローラのdestroyアクションを呼び出す
     delete logout_path
     assert_not is_logged_in?
     assert_response :see_other
     assert_redirected_to root_path
+    # 2番目のウィンドウでログアウトをクリックするユーザをシュミレートする
+    delete logout_path
     follow_redirect!
     assert_select "a[href=?]", login_path
     assert_select "a[href=?]", logout_path,      count: 0
