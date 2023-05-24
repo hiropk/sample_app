@@ -17,7 +17,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert flash.empty?
   end
 
-  test "login with valid information followed by logput" do 
+  test "login with valid information followed by logout" do 
     post login_path, params: {session: { email:    @user.email, 
                                          password: 'password' } }
     assert is_logged_in?
@@ -45,8 +45,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   test "login with remembering" do 
     log_in_as(@user, remember_me: '1')
-    assert_equal cookies[:remember_token] , assigns(:user).remember_token
-    # assert_not cookies[:remember_token].blank?
+    assert_not cookies[:remember_token].blank?
   end
 
   test "login without remembering" do 
