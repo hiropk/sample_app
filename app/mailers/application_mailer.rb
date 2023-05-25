@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  # 本番環境では、user@realdomain.comを自分のメールアドレスに変える
+  default from: "user@realdomain.com" 
   layout "mailer"
 end
