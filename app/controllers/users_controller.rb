@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :index, :destroy]
+  before_action :logged_in_user, only: [:edit, :update, :index, :destroy,
+                                        :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
 
@@ -8,8 +9,10 @@ class UsersController < ApplicationController
   end
 
   def show
+    # shoeアクションの名前付きルーティングで指定したパラメータをparamsメソッドで受け取っている。
     @user = User.find(params[:id])
     (redirect_to root_url and return) unless @user.activated?
+    # params[:pages]はgetメソッドのクエリパラメータからとっている。
     @microposts = @user.microposts.paginate(page: params[:page])
   end
 
@@ -46,6 +49,20 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:susscess] = "User deleted"
     redirect_to users_url, status: :see_other
+  end
+
+  def following 
+    @title = "Folowing"
+    @user = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow', status: :unprocessable_entity
+  end
+
+  def followers 
+    @title = "Folowers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow', status: :unprocessable_entity
   end
 
   private
