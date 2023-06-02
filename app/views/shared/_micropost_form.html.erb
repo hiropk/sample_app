@@ -1,3 +1,5 @@
+<!-- @micropostが空の場合は自動的にcreateアクションを呼び出してフォームで指定した値をcreateアクションに送る。
+今回であれば、params[:content], params[:image] -->
 <%= form_with(model: @micropost) do |f| %>
   <%= render 'shared/error_message', object: f.object %>
   <div class="field">

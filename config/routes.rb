@@ -13,9 +13,17 @@ Rails.application.routes.draw do
   # users, account_activationsコントローラのそれぞれにリソースベースのルーティングを設定
   # これにより、index, show, new, edit, create, update, destroyアクションを個別に定義しなくて済む。
   # onlyオプションをつけることで、該当のアクションのみに限定できる。
-  resources :users
+  resources :users do 
+    member do 
+      get :following
+      get :followers
+    end
+  end
+  # usersリソースの追加に加えて、
+  # users/id/followingやusers/id/followersというルーティングを設定できる。
   resources :account_activations, only: [:edit]
   resources :password_resets, only: [:new, :create, :edit, :update]
   resources :microposts, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   get '/microposts', to: 'static_page#home'
 end
