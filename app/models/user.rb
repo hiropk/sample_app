@@ -1,11 +1,9 @@
 class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
-  # 3-7でuser.followingを実現
   has_many :active_relationships, class_name: "Relationship", 
                                   foreign_key: "follower_id", 
                                   dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed 
-# 8-12でuser.followersを実現
   has_many :passive_relationships, class_name: "Relationship", 
                                    foreign_key: "followed_id", 
                                    dependent: :destroy
@@ -90,7 +88,11 @@ class User < ApplicationRecord
   # 試作feedの定義
   # 完全な実装は自称の「ユーザをフォローする」を参照
   def feed
-    Micropost.where("user_id = ?", id)
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids}) 
+                     OR user_id = :user_id", user_id: id)
+                     .includes(:user, image_attachment: :blob)
   end
 
   # ユーザをフォローする

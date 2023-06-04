@@ -1,0 +1,7 @@
+<!-- CSS_idがfollow_formの要素、今回であればdiv要素全部を:3で置き換える。 -->
+<%= turbo_stream.update "follow_form" do  %>
+  <%= render partial: "users/unfollow" %>
+<% end %>
+<%= turbo_stream.update "followers" do %>
+  <%= @user.followers.count %>
+<% end %>
